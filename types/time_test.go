@@ -529,7 +529,7 @@ func (s *testTimeSuite) TestYear(c *C) {
 	}
 
 	for _, test := range valids {
-		_, err := types.AdjustYear(test.Year, false)
+		_, err := types.AdjustYear(test.Year, false, false)
 		if test.Expect {
 			c.Assert(err, IsNil)
 		} else {
@@ -544,7 +544,7 @@ func (s *testTimeSuite) TestYear(c *C) {
 		{0, 2000},
 	}
 	for _, test := range strYears {
-		res, err := types.AdjustYear(test.Year, true)
+		res, err := types.AdjustYear(test.Year, true, false)
 		c.Assert(err, IsNil)
 		c.Assert(res, Equals, test.Expect)
 	}
@@ -556,7 +556,7 @@ func (s *testTimeSuite) TestYear(c *C) {
 		{0, 0},
 	}
 	for _, test := range numYears {
-		res, err := types.AdjustYear(test.Year, false)
+		res, err := types.AdjustYear(test.Year, false, false)
 		c.Assert(err, IsNil)
 		c.Assert(res, Equals, test.Expect)
 	}

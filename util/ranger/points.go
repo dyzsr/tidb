@@ -229,7 +229,7 @@ func (r *builder) buildFormBinOp(expr *expression.ScalarFunction) []*point {
 			value.SetString(value.GetString(), col.RetType.Collate)
 		}
 		if col.GetType().Tp == mysql.TypeYear {
-			*value, err = types.ConvertDatumToFloatYear(r.sc, *value)
+			*value, err = types.ConvertToMysqlYear(r.sc, *value)
 		}
 		return
 	}
@@ -472,7 +472,7 @@ func (r *builder) buildFromIn(expr *expression.ScalarFunction) ([]*point, bool) 
 			dt.SetString(dt.GetString(), colCollate)
 		}
 		if expr.GetArgs()[0].GetType().Tp == mysql.TypeYear {
-			dt, err = types.ConvertDatumToFloatYear(r.sc, dt)
+			dt, err = types.ConvertToMysqlYear(r.sc, dt)
 			if err != nil {
 				r.err = ErrUnsupportedType.GenWithStack("expr:%v is not converted to year", e)
 				return getFullRange(), hasNull
